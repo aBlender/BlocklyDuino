@@ -99,12 +99,15 @@
                                     <input type="checkbox" class="filled-in" id="chbox_category_other_sensor" value="category_other_sensor">
                                     <label for="chbox_category_other_sensor">other sensor</label>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <input type="checkbox" class="filled-in" id="chbox_category_robolink" value="category_robolink" />
+                                    <label for="chbox_category_robolink">Robolink</label>
+                                </td>
                                 <td></td>
                             </tr>
                         </tbody>
                     </table>
-                
+
             </form>
         </div>
         <div class="modal-footer">
@@ -125,7 +128,7 @@
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">CANCEL</a>
         </div>
     </div>
-    
+
     <!-- modal_import Structure -->
     <div id="modal_import" class="modal">
         <div class="modal-content">
@@ -152,7 +155,7 @@
             <a id="dialog_export_ok" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
         </div>
     </div>
-    
+
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <li><a class="modal-trigger" href="#modal_import" id="button_import">Import</a>
@@ -161,7 +164,7 @@
         <li><a class="modal-trigger" href="#!" id="button_export" onclick="export_xml()">Export</a>
         </li>
     </ul>
-    
+
     <table id="main">
         <tr>
             <td>
@@ -727,6 +730,26 @@
             </value>
         </block>
         <block type="mpr121_reset"></block>
+    </category>
+</category>
+<category id="category_robolink">
+    <category id="category_rokit">
+        <block type="rokit_begin"></block>
+        <!--block type="neopixel_setpixelcolor"></block-->
+        <block type="rokit_dcmotor">
+            <value name="SPEED">
+                <block type="math_number">
+                    <field name="NUM">127</field>
+                </block>
+            </value>
+        </block>
+        <block type="rokit_dcmove">
+            <value name="SPEED">
+                <block type="math_number">
+                    <field name="NUM">127</field>
+                </block>
+            </value>
+        </block>
     </category>
 </category>
 <category id="category_robot">

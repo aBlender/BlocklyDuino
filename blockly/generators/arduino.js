@@ -95,7 +95,10 @@ var profile = {
     blynk_merge_index: [["0","0"],["1","1"],["2","2"]],
     grove_digital: [["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]],
     shield_bot_sensor: [["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]],
-    interrupt:[["2","0"],["3","1"]]
+    interrupt:[["2","0"],["3","1"]],
+    rokit_motor[["M1","M1"],["M2","M2"],["M3","M3"],["M4","M4"]],
+    rokit_motor_direction[["Clockwise","CW"],["Counter Clockwise","CCW"],["Stop","STOP"],["Loose","LOOSE"]],
+    rokit_move_direction[["Forward","forward"],["Backward","backward"],["Right","right"],["Left","left"],["Stop","stop"],["Loose","loose"]]
   },
   arduino_mega: {
     description: "Arduino Mega-compatible board"

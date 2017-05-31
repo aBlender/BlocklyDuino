@@ -537,6 +537,26 @@
         <block type="mpr121_reset"></block>
     </category>
 </category>
+<category id="category_robolink">
+    <category id="category_rokit">
+        <block type="rokit_begin"></block>
+        <!--block type="neopixel_setpixelcolor"></block-->
+        <block type="rokit_dcmotor">
+            <value name="SPEED">
+                <block type="math_number">
+                    <field name="NUM">127</field>
+                </block>
+            </value>
+        </block>
+        <block type="rokit_dcmove">
+            <value name="SPEED">
+                <block type="math_number">
+                    <field name="NUM">127</field>
+                </block>
+            </value>
+        </block>
+    </category>
+</category>
 <category id="category_robot">
     <category id="category_shield_bot">
         <block type="shield_bot_setmaxspeed"></block>
