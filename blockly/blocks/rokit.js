@@ -37,8 +37,7 @@ Blockly.Blocks.rokit.checkBlocks = function(obj) {
   var current = obj.type;
   var blocks = obj.workspace.getAllBlocks();
   for (var i = 0; i < blocks.length; i++) {
-    if ((blocks[i].type == 'rokit_dcmotor' ||
-        blocks[i].type == 'rokit_dcmove' &&
+    if ((blocks[i].type == 'rokit_dcmotor' || blocks[i].type == 'rokit_dcmove') &&
         legal == null){
         if (blocks[i].type != current)  legal = true;
         else  legal = false;
