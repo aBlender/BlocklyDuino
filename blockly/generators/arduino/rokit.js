@@ -31,7 +31,6 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino.rokit_begin = function() {
 
   Blockly.Arduino.definitions_['define_include_rokit'] = '#include <SmartInventor.h>\n';
-  Blockly.Arduino.definitions_['define_neopixel'] = 'Adafruit_NeoPixel pixels = Adafruit_NeoPixel(' + num + ',' + pin + ',NEO_GRB + NEO_KHZ800);\n';
   Blockly.Arduino.setups_['setup_rokit_motor_begin'] = 'SmartInventor.DCMotorUse();\n'
 
   var code = '';

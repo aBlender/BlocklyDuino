@@ -30,7 +30,7 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks.rokit.HUE = 215;
 
-Blockly.Blocks.rokit.image = filepath.media + '/neopixel.jpg';
+Blockly.Blocks.rokit.image = filepath.media + '/rokit_moustbot.png';
 
 Blockly.Blocks.rokit.checkBlocks = function(obj) {
   var legal = null;
@@ -83,7 +83,7 @@ Blockly.Blocks['rokit_dcmotor'] = {
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 64, 64))
-            .appendField("DC MOTOR")
+            .appendField("DC Motor")
             .appendField(new Blockly.FieldDropdown(profile.default.rokit_motor),"MOTOR");
         this.appendDummyInput()
             .appendField("Dir")
@@ -115,7 +115,7 @@ Blockly.Blocks['rokit_dcmove'] = {
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 64, 64))
-            .appendField("DC MOVE")
+            .appendField("DC Move")
             .appendField("Dir")
             .appendField(new Blockly.FieldDropdown(profile.default.rokit_move_direction),"DIR");
         this.appendValueInput("SPEED")
