@@ -53,3 +53,19 @@ Blockly.Arduino.rokit_dcmove = function() {
   var code = 'SmartInventor.DCMove(' + dir + ',' + speed +');\n';
   return code;
 };
+
+Blockly.Arduino.rokit_buzz = function() {
+  var note = this.getFieldValue('NOTE');
+  var tempo = this.getFieldValue('TEMPO');
+
+  var code = 'SmartInventor.Buzz(' + note + ',' + tempo +');\n';
+  return code;
+};
+
+Blockly.Arduino.rokit_buzz_custom = function() {
+  var freq = Blockly.Arduino.valueToCode(this, 'FREQ', Blockly.Arduino.ORDER_ATOMIC) || '262'
+  var tempo = this.getFieldValue('TEMPO');
+
+  var code = 'SmartInventor.Buzz(' + freq + ',' + tempo +');\n';
+  return code;
+};

@@ -31,6 +31,7 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks.rokit.HUE = 215;
 
 Blockly.Blocks.rokit.image = filepath.media + '/rokit_mousebot.png';
+Blockly.Blocks.rokit.musicBot = filepath.media + '/rokit_mousebot_music.png';
 
 Blockly.Blocks.rokit.checkBlocks = function(obj) {
   var legal = null;
@@ -51,7 +52,7 @@ Blockly.Blocks.rokit.checkBlocks = function(obj) {
 
 Blockly.Blocks['rokit_begin'] = {
     init: function() {
-        this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL); //TODO
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL); //TODO
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 48, 48))
@@ -66,20 +67,20 @@ Blockly.Blocks['rokit_begin'] = {
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.NEOPIXEL_BEGIN_TOOLTIP); //TODO
+        this.setTooltip("This sets up the SmartInventor Library and enables DC Motor Use");
     },
     onchange: function() {
         if (!this.workspace) {
             // Block has been deleted.
             return;
         }
-        this.setWarningText("Need to install SmartInventor Library"); //TODO
+        this.setWarningText("Make sure to install the Robolink SmartInventor Library in Arduino"); //TODO
     }
 };
 
 Blockly.Blocks['rokit_dcmotor'] = {
     init: function() {
-        this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 48, 48))
@@ -111,7 +112,7 @@ Blockly.Blocks['rokit_dcmotor'] = {
 
 Blockly.Blocks['rokit_dcmove'] = {
     init: function() {
-        this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 48, 48))
@@ -125,6 +126,67 @@ Blockly.Blocks['rokit_dcmove'] = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip("Speed takes values from 0 to 127, 0 = slowest, 127 = fastest");
+    },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has en deleted.
+      return;
+    }
+    if (!Blockly.Blocks.rokit.checkBlocks(this)) {
+      this.setWarningText("ROKIT Setup block is needed");
+    } else {
+      this.setWarningText(null);
+    }
+  }
+};
+
+Blockly.Blocks['rokit_buzz'] = {
+    init: function() {
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
+        this.setColour(Blockly.Blocks.rokit.HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.musicBot, 48, 48))
+            .appendField("play")
+            .appendField("note")
+            .appendField(new Blockly.FieldDropdown(profile.default.rokit_note),"NOTE");
+        this.appendDummyInput()
+            .appendField("for")
+            .appendField(new Blockly.FieldDropdown(profile.default.rokit_tempo),"TEMPO");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip("Plays a note for a specified number of beats");
+    },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has en deleted.
+      return;
+    }
+    if (!Blockly.Blocks.rokit.checkBlocks(this)) {
+      this.setWarningText("ROKIT Setup block is needed");
+    } else {
+      this.setWarningText(null);
+    }
+  }
+};
+
+Blockly.Blocks['rokit_buzz_custom'] = {
+    init: function() {
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
+        this.setColour(Blockly.Blocks.rokit.HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.musicBot, 48, 48))
+            .appendField("play")
+        this.appendValueInput("FREQ")
+            .setCheck("Number")
+            .appendField("frequency");
+        this.appendDummyInput()
+            .appendField("for")
+            .appendField(new Blockly.FieldDropdown(profile.default.rokit_tempo),"TEMPO");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip("Plays a set frequnecy for a specified number of beats");
     },
   onchange: function() {
     if (!this.workspace) {

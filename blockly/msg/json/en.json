@@ -262,7 +262,7 @@
   "MATH_ARITHMETIC_TOOLTIP_MINUS": "Return the difference of the two numbers.",
   "MATH_ARITHMETIC_TOOLTIP_MULTIPLY": "Return the product of the two numbers.",
   "MATH_ARITHMETIC_TOOLTIP_DIVIDE": "Return the quotient of the two numbers.",
-  "MATH_ARITHMETIC_TOOLTIP_MODULO": "Return the remainder when one integer is divided by another.",  
+  "MATH_ARITHMETIC_TOOLTIP_MODULO": "Return the remainder when one integer is divided by another.",
   "MATH_ARITHMETIC_TOOLTIP_POWER": "Return the first number raised to the power of the second number.",
   "MATH_SINGLE_HELPURL": "https://en.wikipedia.org/wiki/Square_root",
   "MATH_SINGLE_OP_ROOT": "square root",
@@ -757,6 +757,7 @@
   "NEOPIXEL_SHOW_HELPURL":"https://github.com/adafruit/Adafruit_NeoPixel",
   "NEOPIXEL_SHOW":"Show",
   "NEOPIXEL_SHOW_TOOLTIP":"This sends the updated pixel color to the hardware.",
+  "ROKIT_FUNCTIONS_HELPURL": "http://www.robolink.com/smart-inventor-functions-guide/",
   "SERVO_ATTACH_HELPURL": "http://www.arduino.cc/en/Reference/ServoAttach",
   "SERVO_ATTACH_TEXT1" : "Attach Pin",
   "SERVO_ATTACH_TEXT2" : "",
@@ -1040,7 +1041,7 @@
   "MPR121_VALUE_TITLE": "Capacitance Value",
   "MPR121_VALUE_TOOLTIP": "value of capacitance",
   "MPR121_RESET_TITLE": "Reset",
-  "MPR121_RESET_TOOLTIP": "Reset the sensor",  
+  "MPR121_RESET_TOOLTIP": "Reset the sensor",
   "MPR121_BEGIN_WARNING": "Need to install the Adafruit_MPR121 library.",
   "MPR121_WARNING": "Need to Begin block."
 }
