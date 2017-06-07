@@ -100,7 +100,8 @@ var profile = {
     rokit_move_direction: [["Forward","forward"],["Backward","backward"],["Right","right"],["Left","left"],["Stop","stop"],["Loose","loose"]],
     rokit_tempo:[["Whole Note","1"],["1/2 Note","2"],["1/4 Note","4"],["1/8 Note","8"],["1/16 Note","16"],["1/32 Note","32"]],
     rokit_note:[["C3","NOTE_C3"], ["C#3","NOTE_CS3"], ["D3","NOTE_D3"], ["D#3","NOTE_DS3"], ["E3","NOTE_E3"], ["F3","NOTE_F3"], ["F#3","NOTE_FS3"], ["G3","NOTE_G3"], ["G#3","NOTE_GS3"], ["A3","NOTE_A3"], ["A#3","NOTE_AS3"], ["B3","NOTE_B3"],
-                ["C4","NOTE_C4"], ["C#4","NOTE_CS4"], ["D4","NOTE_D4"], ["D#4","NOTE_DS4"], ["E4","NOTE_E4"], ["F3","NOTE_F4"], ["F#4","NOTE_FS4"], ["G4","NOTE_G4"], ["G#4","NOTE_GS4"], ["A4","NOTE_A4"], ["A#4","NOTE_AS4"], ["B4","NOTE_B4"], ["C5","NOTE_C5"]]
+                ["C4","NOTE_C4"], ["C#4","NOTE_CS4"], ["D4","NOTE_D4"], ["D#4","NOTE_DS4"], ["E4","NOTE_E4"], ["F3","NOTE_F4"], ["F#4","NOTE_FS4"], ["G4","NOTE_G4"], ["G#4","NOTE_GS4"], ["A4","NOTE_A4"], ["A#4","NOTE_AS4"], ["B4","NOTE_B4"], ["C5","NOTE_C5"]],
+    rokit_remote_key: [["UP", "KEY_U"], ["DOWN", "KEY_D"], ["LEFT", "KEY_L"], ["RIGHT", "KEY_R"], ["CENTER", "KEY_C"], ["F1", "KEY_F1"], ["F2", "KEY_F2"], ["F3", "KEY_F3"], ["F4", "KEY_F4"]]
   },
   arduino_mega: {
     description: "Arduino Mega-compatible board"

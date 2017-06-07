@@ -69,3 +69,20 @@ Blockly.Arduino.rokit_buzz_custom = function() {
   var code = 'SmartInventor.Buzz(' + freq + ',' + tempo +');\n';
   return code;
 };
+
+Blockly.Arduino.rokit_remote_enable = function() {
+  var code = 'SmartInventor.TVRemoconUse();\n';
+  return code;
+};
+
+Blockly.Arduino.rokit_remote_disable = function() {
+  var code = 'SmartInventor.TVRemoconClose();\n';
+  return code;
+};
+
+Blockly.Arduino.rokit_remote_key_pressed = function() {
+  var remote_key = this.getFieldValue('REMOTEKEY');
+
+  var code = 'SmartInventor.TVRemoconData() == ' + remote_key;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};

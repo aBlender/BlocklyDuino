@@ -28,17 +28,23 @@ goog.provide('Blockly.Blocks.rokit');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.rokit.HUE = 215;
+Blockly.Blocks.rokit.HUE = 93;
 
-Blockly.Blocks.rokit.image = filepath.media + '/rokit_mousebot.png';
-Blockly.Blocks.rokit.musicBot = filepath.media + '/rokit_mousebot_music.png';
+Blockly.Blocks.rokit.mouseBotIcon = filepath.media + '/mousebot_icon.png';
+Blockly.Blocks.rokit.musicIcon = filepath.media + '/rokit_note_icon.png';
+Blockly.Blocks.rokit.rokitLogo = filepath.media + '/rokit_logo.png';
+Blockly.Blocks.rokit.remoteIcon = filepath.media + '/rokit_remote_icon.png';
+Blockly.Blocks.rokit.remoteDisableIcon = filepath.media + '/remote_disable_icon.png';
+Blockly.Blocks.rokit.motorIcon = filepath.media + '/rokit_motor_icon.png';
 
 Blockly.Blocks.rokit.checkBlocks = function(obj) {
   var legal = null;
   var current = obj.type;
   var blocks = obj.workspace.getAllBlocks();
   for (var i = 0; i < blocks.length; i++) {
-    if ((blocks[i].type == 'rokit_dcmotor' || blocks[i].type == 'rokit_dcmove') &&
+    if ((blocks[i].type == 'rokit_dcmotor' || blocks[i].type == 'rokit_dcmove' ||
+         blocks[i].type == 'rokit_buzz' || blocks[i].type == 'rokit_buzz_custom' ||
+         blocks[i].type == 'rokit_remote_enable') &&
         legal == null){
         if (blocks[i].type != current)  legal = true;
         else  legal = false;
@@ -50,13 +56,30 @@ Blockly.Blocks.rokit.checkBlocks = function(obj) {
   return legal;
 };
 
+Blockly.Blocks.rokit.checkRemoteBlocks = function(obj) {
+  var legal = null;
+  var current = obj.type;
+  var blocks = obj.workspace.getAllBlocks();
+  for (var i = 0; i < blocks.length; i++) {
+    if ((blocks[i].type == 'rokit_remote_data' || blocks[i].type == 'rokit_remote_key_pressed') &&
+        legal == null){
+        if (blocks[i].type != current)  legal = true;
+        else  legal = false;
+    }
+    if(blocks[i].type == 'rokit_remote_enable'){
+      return true;
+    }
+  }
+  return legal;
+};
+
 Blockly.Blocks['rokit_begin'] = {
     init: function() {
         this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL); //TODO
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 48, 48))
-            .appendField("Setup Rokit SMART"); //TODO
+            .appendField("Setup")
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.rokitLogo, 198, 20));
             //.appendField(new Blockly.FieldTextInput("16"), "NUM");
         //this.appendDummyInput()
         //    .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
@@ -83,7 +106,7 @@ Blockly.Blocks['rokit_dcmotor'] = {
         this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 48, 48))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.motorIcon, 22, 20))
             .appendField("DC Motor")
             .appendField(new Blockly.FieldDropdown(profile.default.rokit_motor),"MOTOR");
         this.appendDummyInput()
@@ -115,13 +138,12 @@ Blockly.Blocks['rokit_dcmove'] = {
         this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.image, 48, 48))
-            .appendField("DC Move")
-            .appendField("Dir")
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.mouseBotIcon, 48, 40))
+            .appendField("Move")
             .appendField(new Blockly.FieldDropdown(profile.default.rokit_move_direction),"DIR");
         this.appendValueInput("SPEED")
             .setCheck("Number")
-            .appendField("Speed");
+            .appendField("with Speed");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -145,7 +167,7 @@ Blockly.Blocks['rokit_buzz'] = {
         this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.musicBot, 48, 48))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.musicIcon, 15, 20))
             .appendField("play")
             .appendField("note")
             .appendField(new Blockly.FieldDropdown(profile.default.rokit_note),"NOTE");
@@ -175,7 +197,7 @@ Blockly.Blocks['rokit_buzz_custom'] = {
         this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
         this.setColour(Blockly.Blocks.rokit.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.musicBot, 48, 48))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.musicIcon, 15, 20))
             .appendField("play")
         this.appendValueInput("FREQ")
             .setCheck("Number")
@@ -195,6 +217,87 @@ Blockly.Blocks['rokit_buzz_custom'] = {
     }
     if (!Blockly.Blocks.rokit.checkBlocks(this)) {
       this.setWarningText("ROKIT Setup block is needed");
+    } else {
+      this.setWarningText(null);
+    }
+  }
+};
+
+Blockly.Blocks['rokit_remote_enable'] = {
+    init: function() {
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL); //TODO
+        this.setColour(Blockly.Blocks.rokit.HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.remoteIcon, 48, 40))
+            .appendField("Enable Remote Control"); //TODO
+            //.appendField(new Blockly.FieldTextInput("16"), "NUM");
+        //this.appendDummyInput()
+        //    .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
+        //    .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        //this.appendDummyInput()
+        //    .appendField(Blockly.Msg.NEOPIXEL_BEGIN_BRIGHTNESS)
+        //    .appendField(new Blockly.FieldTextInput("50"), "BRIGHTNESS");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip("Enables Remote Control Use");
+    },
+    onchange: function() {
+      if (!this.workspace) {
+        // Block has en deleted.
+        return;
+      }
+      if (!Blockly.Blocks.rokit.checkBlocks(this)) {
+        this.setWarningText("ROKIT Setup block is needed");
+      } else {
+        this.setWarningText(null);
+      }
+    }
+};
+
+Blockly.Blocks['rokit_remote_disable'] = {
+    init: function() {
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL); //TODO
+        this.setColour(Blockly.Blocks.rokit.HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.rokit.remoteDisableIcon, 42, 40))
+            .appendField("Disable Remote Control"); //TODO
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip("Disables Remote Control Use");
+    },
+    onchange: function() {
+      if (!this.workspace) {
+        // Block has en deleted.
+        return;
+      }
+      if (!Blockly.Blocks.rokit.checkBlocks(this)) {
+        this.setWarningText("ROKIT Setup block is needed");
+      } else {
+        this.setWarningText(null);
+      }
+    }
+};
+
+Blockly.Blocks['rokit_remote_key_pressed'] = {
+    init: function() {
+        this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL);
+        this.setColour(270);
+        this.appendDummyInput()
+            .appendField("remote key")
+            .appendField(new Blockly.FieldDropdown(profile.default.rokit_remote_key),"REMOTEKEY")
+            .appendField("is pressed?");
+        this.setOutput(true, "Boolean");
+        this.setTooltip("Returns true if the specified key is pressed");
+    },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has en deleted.
+      return;
+    }
+    if (!Blockly.Blocks.rokit.checkRemoteBlocks(this)) {
+      this.setWarningText("ROKIT Remote Enable is needed");
     } else {
       this.setWarningText(null);
     }
