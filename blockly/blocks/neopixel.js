@@ -30,7 +30,7 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks.neopixel.HUE = 215;
 
-Blockly.Blocks.neopixel.image = filepath.media + '/neopixel.jpg';
+Blockly.Blocks.neopixel.image = filepath.media + '/neopixels_icon.png';
 
 Blockly.Blocks.neopixel.checkBlocks = function(obj) {
   var legal = null;
@@ -57,7 +57,7 @@ Blockly.Blocks['neopixel_begin'] = {
         this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 64, 64))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
             .appendField(Blockly.Msg.NEOPIXEL_BEGIN_SETTING)
             .appendField(Blockly.Msg.NEOPIXEL_BEGIN_NUM)
             .appendField(new Blockly.FieldTextInput("16"), "NUM");
@@ -86,7 +86,7 @@ Blockly.Blocks['neopixel_setpixelcolor'] = {
         this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 64, 64))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
         this.appendValueInput("TARGET")
             .setCheck("Number")
             .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TARGET)
@@ -117,7 +117,7 @@ Blockly.Blocks['neopixel_custom_setpixelcolor'] = {
         this.setHelpUrl(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_HELPURL);
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 64, 64))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
         this.appendValueInput("TARGET")
             .setCheck("Number")
             .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TARGET)
@@ -153,7 +153,7 @@ Blockly.Blocks['neopixel_show'] = {
         this.setHelpUrl(Blockly.Msg.NEOPIXEL_SHOW_HELPURL);
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 64, 64))
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
             .appendField(Blockly.Msg.NEOPIXEL_SHOW);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
