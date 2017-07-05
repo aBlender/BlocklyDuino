@@ -138,6 +138,6 @@ Blockly.Arduino.capsense_read = function() {
   var pin_a = this.getFieldValue('PINA');
   var pin_b = this.getFieldValue('PINB');
 
-  var code = 'touchpad' + pin_a + '_' + pin_b + '.capacitiveSensor(30);';
+  var code = 'touchpad' + pin_a + '_' + pin_b + '.capacitiveSensor(30)';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
