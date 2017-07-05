@@ -122,3 +122,22 @@ Blockly.Arduino.inout_analogpin = function() {
   var code = this.getFieldValue('PIN');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino.capsense_begin = function() {
+  var pin_a = this.getFieldValue('PINA');
+  var pin_b = this.getFieldValue('PINB');
+
+  Blockly.Arduino.definitions_['define_include_capsense'] = '#include <CapacitiveSensor.h>\n';
+  Blockly.Arduino.definitions_['setup_capsense_begin_' + pin_a + '_' + pin_b] = 'CapacitiveSensor touchpad' + pin_a + '_' + pin_b + ' = CapacitiveSensor(' + pin_a + ',' + pin_b + ');\n';
+
+  var code = '';
+  return code;
+};
+
+Blockly.Arduino.capsense_read = function() {
+  var pin_a = this.getFieldValue('PINA');
+  var pin_b = this.getFieldValue('PINB');
+
+  var code = 'touchpad' + pin_a + '_' + pin_b + '.capacitiveSensor(30);';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};

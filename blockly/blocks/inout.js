@@ -32,6 +32,8 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks.inout.HUE = 230;
 
+Blockly.Blocks.inout.capSenseIcon = filepath.media + '/capsense_icon.png';
+
 Blockly.Blocks['inout_buildin_led'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
@@ -214,3 +216,70 @@ Blockly.Blocks['inout_analogpin'] = {
   }
 };
 
+Blockly.Blocks.inout.checkCapSenseBlocks = function(obj) {
+  var legal = null;
+  var current = obj.type;
+  var blocks = obj.workspace.getAllBlocks();
+  for (var i = 0; i < blocks.length; i++) {
+    if ((blocks[i].type == 'capsense_read') &&
+        legal == null){
+        if (blocks[i].type != current)  legal = true;
+        else  legal = false;
+    }
+    if(blocks[i].type == 'capsense_begin'){
+      return true;
+    }
+  }
+  return legal;
+};
+
+Blockly.Blocks['capsense_begin'] = {
+    init: function() {
+        //this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL); //TODO
+        this.setColour(Blockly.Blocks.rokit.HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.inout.capSenseIcon, 54, 40))
+            .appendField("Setup Touch Sensor on pins: ")
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PINA")
+            .appendField("and")
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PINB");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip("This sets up the Capacitive Sensor Library");
+    },
+    onchange: function() {
+        if (!this.workspace) {
+            // Block has been deleted.
+            return;
+        }
+        this.setWarningText("Make sure to install the Capcitive Sensor Library in Arduino"); //TODO
+    }
+};
+
+Blockly.Blocks['capsense_read'] = {
+    init: function() {
+        //this.setHelpUrl(Blockly.Msg.ROKIT_FUNCTIONS_HELPURL); //TODO
+        this.setColour(Blockly.Blocks.rokit.HUE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(Blockly.Blocks.inout.capSenseIcon, 54, 40))
+            .appendField("Read touch sensor on pins: ")
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PINA")
+            .appendField("and")
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PINB");
+        this.setInputsInline(true);
+        this.setOutput(true, "Number");
+        this.setTooltip("Returns the touch sensor reading");
+    },
+    onchange: function() {
+      if (!this.workspace) {
+        // Block has en deleted.
+        return;
+      }
+      if (!Blockly.Blocks.inout.checkCapSenseBlocks(this)) {
+        this.setWarningText("Touch Sensor Setup block is needed");
+      } else {
+        this.setWarningText(null);
+      }
+    }
+};
