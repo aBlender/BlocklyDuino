@@ -34,9 +34,9 @@ Blockly.Arduino.neopixel_begin = function() {
   var brightness = this.getFieldValue('BRIGHTNESS');
 
   Blockly.Arduino.definitions_['define_include_neopixel'] = '#include <Adafruit_NeoPixel.h>\n';
-  Blockly.Arduino.definitions_['define_neopixel'] = 'Adafruit_NeoPixel pixels = Adafruit_NeoPixel(' + num + ',' + pin + ',NEO_GRB + NEO_KHZ800);\n';
-  Blockly.Arduino.setups_['setup_neopixel_begin'] = 'pixels.begin();\n'
-  Blockly.Arduino.setups_['setup_neopixel_brightness'] = 'pixels.setBrightness('+ brightness + ');\n'
+  Blockly.Arduino.definitions_['define_neopixel' + pin] = 'Adafruit_NeoPixel pixels' + pin + ' = Adafruit_NeoPixel(' + num + ',' + pin + ',NEO_GRB + NEO_KHZ800);\n';
+  Blockly.Arduino.setups_['setup_neopixel_begin' + pin] = 'pixels' + pin + '.begin();\n'
+  Blockly.Arduino.setups_['setup_neopixel_brightness' + pin] = 'pixels' + pin + '.setBrightness('+ brightness + ');\n'
 
   var code = '';
   return code;
@@ -48,24 +48,27 @@ function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
 function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
 
 Blockly.Arduino.neopixel_setpixelcolor = function() {
+  var pin = this.getFieldValue('PIN');
   var target = Blockly.Arduino.valueToCode(this, 'TARGET', Blockly.Arduino.ORDER_ATOMIC) || '0'
   var colour_rgb = this.getFieldValue('RGB');
 
-  var code = 'pixels.setPixelColor(' + target + ',pixels.Color(' +hexToR(colour_rgb)+','+hexToG(colour_rgb)+',' + hexToB(colour_rgb)+'));\n';
+  var code = 'pixels' + pin + '.setPixelColor(' + target + ',pixels' + pin + '.Color(' +hexToR(colour_rgb)+','+hexToG(colour_rgb)+',' + hexToB(colour_rgb)+'));\n';
   return code;
 };
 
 Blockly.Arduino.neopixel_custom_setpixelcolor = function() {
+  var pin = this.getFieldValue('PIN');
   var target = Blockly.Arduino.valueToCode(this, 'TARGET', Blockly.Arduino.ORDER_ATOMIC) || '0'
   var r = Blockly.Arduino.valueToCode(this, 'R', Blockly.Arduino.ORDER_ATOMIC) || '255'
   var g = Blockly.Arduino.valueToCode(this, 'G', Blockly.Arduino.ORDER_ATOMIC) || '0'
   var b = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_ATOMIC) || '0'
 
-  var code = 'pixels.setPixelColor(' + target + ', pixels.Color(' + r + ',' + g +',' + b + '));\n';
+  var code = 'pixels' + pin + '.setPixelColor(' + target + ', pixels' + pin + '.Color(' + r + ',' + g +',' + b + '));\n';
   return code;
 };
 
 Blockly.Arduino.neopixel_show = function() {
-  var code = 'pixels.show();\n';
+  var pin = this.getFieldValue('PIN');
+  var code = 'pixels' + pin + '.show();\n';
   return code;
 };

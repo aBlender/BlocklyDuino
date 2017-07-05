@@ -87,6 +87,8 @@ Blockly.Blocks['neopixel_setpixelcolor'] = {
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
+            .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
         this.appendValueInput("TARGET")
             .setCheck("Number")
             .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TARGET)
@@ -118,6 +120,8 @@ Blockly.Blocks['neopixel_custom_setpixelcolor'] = {
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
+            .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
         this.appendValueInput("TARGET")
             .setCheck("Number")
             .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR_TARGET)
@@ -154,6 +158,8 @@ Blockly.Blocks['neopixel_show'] = {
         this.setColour(Blockly.Blocks.neopixel.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage(Blockly.Blocks.neopixel.image, 83, 40))
+            .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN)
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
             .appendField(Blockly.Msg.NEOPIXEL_SHOW);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
